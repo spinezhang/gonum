@@ -72,7 +72,7 @@ func (impl Implementation) Dormhr(side blas.Side, trans blas.Transpose, m, n, il
 	case lda < max(1, nq):
 		panic(badLdA)
 	case lwork < max(1, nw) && lwork != -1:
-		panic(badWork)
+		panic(badLWork)
 	case len(work) < max(1, lwork):
 		panic(shortWork)
 	}

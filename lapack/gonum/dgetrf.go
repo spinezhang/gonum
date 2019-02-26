@@ -45,7 +45,7 @@ func (impl Implementation) Dgetrf(m, n int, a []float64, lda int, ipiv []int) (o
 	switch {
 	case len(a) < (m-1)*lda+n:
 		panic(shortA)
-	case len(ipiv) < mn:
+	case len(ipiv) != mn:
 		panic(badIpiv)
 	}
 
@@ -59,7 +59,7 @@ func (impl Implementation) Dgetrf(m, n int, a []float64, lda int, ipiv []int) (o
 	ok = true
 	for j := 0; j < mn; j += nb {
 		jb := min(mn-j, nb)
-		blockOk := impl.Dgetf2(m-j, jb, a[j*lda+j:], lda, ipiv[j:])
+		blockOk := impl.Dgetf2(m-j, jb, a[j*lda+j:], lda, ipiv[j:j+jb])
 		if !blockOk {
 			ok = false
 		}

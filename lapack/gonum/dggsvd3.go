@@ -137,7 +137,7 @@ func (impl Implementation) Dggsvd3(jobU, jobV, jobQ lapack.GSVDJob, m, n, p int,
 	case len(iwork) < n:
 		panic(shortWork)
 	case lwork < 1 && lwork != -1:
-		panic(badWork)
+		panic(badLWork)
 	case len(work) < max(1, lwork):
 		panic(shortWork)
 	}
